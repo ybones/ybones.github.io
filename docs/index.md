@@ -66,7 +66,7 @@ type bmap struct {
     overflow uintptr
 }
 ```
-![](../golang/map/assets/bmap.png)
+![](assets/bmap.png)
 ### 注解
  - map使用hash表实现，并使用拉链法解决冲突。
  - map的value不可寻址,扩容过程中会发生键值对迁移。
@@ -124,7 +124,7 @@ type slice struct {
     如果原Slice容量大于等于1024，则新Slice容量将扩大为原来的1.25倍;
 
 ## unsafe.Sizeof
-![](../golang/size/assets/sizeof.png)
+![](assets/sizeof.png)
 
 # MySQL
 ## 事务 ACID
@@ -147,20 +147,6 @@ type slice struct {
 ## 缓存击穿
 ## 缓存雪崩
 ## 分布式锁
-
-# leetcode
-- [两数之和](../leetcode/两数之和/readme.md)
-- [两数相加](../leetcode/两数相加/readme.md)
-- [具有所有最深节点的最小子树](../leetcode/具有所有最深节点的最小子树/readme.md)
-- [合并两个有序链表](../leetcode/合并两个有序链表/readme.md)
-- [回文数](../leetcode/回文数/readme.md)
-- [整数反转](../leetcode/整数反转/readme.md)
-- [无重复字符的最长子串](../leetcode/无重复字符的最长子串/readme.md)
-- [最长公共前缀](../leetcode/最长公共前缀/readme.md)
-- [有效的括号](../leetcode/有效的括号/readme.md)
-- [栈的最小值](../leetcode/栈的最小值/readme.md)
-- [移除元素](../leetcode/移除元素/readme.md)
-- [罗马数字转整数](../leetcode/罗马数字转整数/readme.md)
 
 # 互斥锁
 ## 互斥锁的实现机制
