@@ -66,7 +66,7 @@ type bmap struct {
     overflow uintptr
 }
 ```
-![](../golang/map/assets/bmap.png)
+![](https://github.com/ybones/ybones.github.io/blob/main/golang/map/assets/bmap.png)
 ### 注解
  - map使用hash表实现，并使用拉链法解决冲突。
  - map的value不可寻址,扩容过程中会发生键值对迁移。
@@ -124,7 +124,29 @@ type slice struct {
     如果原Slice容量大于等于1024，则新Slice容量将扩大为原来的1.25倍;
 
 ## unsafe.Sizeof
-![](../golang/size/assets/sizeof.png)
+![](https://github.com/ybones/ybones.github.io/blob/main/golang/size/assets/sizeof.png)
+
+# MySQL
+## 事务 ACID
+- `原子性`(Atomicity)：一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。
+- `一致性`(Consistency)：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。
+- `隔离性`(Isolation)：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。
+- `持久性`(Durability)：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。
+## 隔离级别
+## 锁
+## 索引
+## 存储引擎
+# Redis
+## 基本数据结构及其实现
+### string
+### hash
+### list
+### set
+### zset
+## 缓存穿透
+## 缓存击穿
+## 缓存雪崩
+## 分布式锁
 
 # leetcode
 - [两数之和](../leetcode/两数之和/readme.md)
@@ -139,6 +161,7 @@ type slice struct {
 - [栈的最小值](../leetcode/栈的最小值/readme.md)
 - [移除元素](../leetcode/移除元素/readme.md)
 - [罗马数字转整数](../leetcode/罗马数字转整数/readme.md)
+
 # 互斥锁
 ## 互斥锁的实现机制
 互斥锁是并发控制的一个基本手段，是为了避免竞争而建立的一种并发控制机制。
