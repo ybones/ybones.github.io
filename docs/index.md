@@ -124,19 +124,7 @@ type slice struct {
     如果原Slice容量大于等于1024，则新Slice容量将扩大为原来的1.25倍;
 
 ## unsafe.Sizeof
-| 类型                          | 大小                                 |
-| ----------------------------- | ------------------------------------ |
-| intN, uintN, floatN, complexN | N/8 个字节(例如 float64 是 8 个字节) |
-| bool                          | 1 个字节                             |
-| int, uint, uintptr            | 1 个机器字                           |
-| \*T                           | 1 个机器字                           |
-| string                        | 2 个机器字(data,len)                 |
-| []T                           | 3 个机器字(data,len,cap)             |
-| map                           | 1 个机器字                           |
-| func                          | 1 个机器字                           |
-| chan                          | 1 个机器字                           |
-| interface                     | 2 个机器字(type,value)               |
-| [n]T                          | n\*T 个机器字                        |
+![](../golang/size/assets/sizeof.png)
 
 # leetcode
 - [两数之和](../leetcode/两数之和/readme.md)
