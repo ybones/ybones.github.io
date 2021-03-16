@@ -146,6 +146,7 @@ type slice struct {
 2、直接用 SET 来改变 MySQL 的自动提交模式
 - SET AUTOCOMMIT=0 禁止自动提交
 - SET AUTOCOMMIT=1 开启自动提交
+
 ## 隔离级别（隔离性
 ### Read Uncommitted（读取未提交内容）RU
     在该隔离级别，所有事务都可以看到其他未提交事务的执行结果。
@@ -153,6 +154,7 @@ type slice struct {
     set global transaction isolation level read uncommitted;
     eg:无法解决脏读
 ![](assets/read_uncommitted.jpg)
+
 ### Read Committed（读取提交内容）RC
     这是大多数数据库系统的默认隔离级别（但不是MySQL默认的）。它满足了隔离的简单定义：一个事务只能看见已经提交事务所做的改变。
     这种隔离级别 也支持所谓的不可重复读（Nonrepeatable Read），因为同一事务的其他实例在该实例处理其间可能会有新的commit，所以同一select可能返回不同结果。
@@ -168,6 +170,7 @@ type slice struct {
 
 ![](assets/repeatable_read.jpg)
 ![](assets/unreal_read.jpg)
+
 ### Serializable（可串行化）S
     这是最高的隔离级别，它通过强制事务排序，使之不可能相互冲突，从而解决幻读问题。
     简言之，它是在每个读的数据行上加上共享锁。在这个级别，可能导致大量的超时现象和锁竞争。
@@ -177,15 +180,20 @@ type slice struct {
 - 可重复读(repeatable read)：可重复读指的是在一个事务内，最开始读到的数据和事务结束前的任意时刻读到的同一批数据都是一致的。通常针对数据更新（UPDATE）操作。
 - 不可重复读(Non-repeatable read)：在一个事务的两次查询之中数据不一致，这可能是两次查询过程中间插入了一个事务更新的原有的数据。通常针对数据更新（UPDATE）操作。
 - 幻读(Phantom Read)：在一个事务的两次查询中数据笔数不一致，例如有一个事务查询了几列(Row)数据，而另一个事务却在此时插入了新的几列数据，先前的事务在接下来的查询中，就有几列数据是未查询出来的，如果此时插入和另外一个事务插入的数据，就会报错。幻读是针对数据插入（INSERT）操作来说的。
+
 ![](assets/isolation.png)
+
 ## 一般公司数据库配置
     读提交级别 + binlog的row格式
+    
 ## 锁
 ## MVCC(多版本并发控制)
 ## binlog
+
 - statement:记录的是修改SQL语句
 - row：记录的是每行实际数据的变更
 - mixed：statement和row模式的混合
+
 ## 索引
 ## 存储引擎
 # Redis
