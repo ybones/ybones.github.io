@@ -66,7 +66,7 @@ type bmap struct {
     overflow uintptr
 }
 ```
-![](https://github.com/ybones/ybones.github.io/blob/main/golang/map/assets/bmap.png)
+![](../golang/map/assets/bmap.png)
 ### 注解
  - map使用hash表实现，并使用拉链法解决冲突。
  - map的value不可寻址,扩容过程中会发生键值对迁移。
@@ -124,7 +124,7 @@ type slice struct {
     如果原Slice容量大于等于1024，则新Slice容量将扩大为原来的1.25倍;
 
 ## unsafe.Sizeof
-![](https://github.com/ybones/ybones.github.io/blob/main/golang/size/assets/sizeof.png)
+![](../golang/size/assets/sizeof.png)
 
 # MySQL
 ## 事务 ACID
