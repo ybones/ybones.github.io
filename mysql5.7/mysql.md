@@ -132,10 +132,10 @@
 > -  query expansion search（查询扩展搜索）
 
 ### 什么是前缀索引？
-    ALTER TABLE table_name ADD KEY(column_name(prefix_length));
-    概念：当索引是很长的字符序列（BLOB，TEXT或者长的VARCHAR）时，这个索引将会很占内存，而且会很慢，这时候就会用到前缀索引。索引开始的部分字符，这样可以大大节约索引空间，提高索引效率，但是会降低索引的选择性。
-    前缀索引如何选择：一般的定义原则是 1.0 * count(distinct columnName)/count(*)
-    好处和坏处：MySQL 前缀索引能有效减小索引文件的大小，提高索引的速度。但是前缀索引也有它的坏处：MySQL 不能在 ORDER BY 或 GROUP BY 中使用前缀索引，也不能把它们用作覆盖索引(Covering Index)。
+- ALTER TABLE table_name ADD KEY(column_name(prefix_length));
+- 概念：当索引是很长的字符序列（BLOB，TEXT或者长的VARCHAR）时，这个索引将会很占内存，而且会很慢，这时候就会用到前缀索引。索引开始的部分字符，这样可以大大节约索引空间，提高索引效率，但是会降低索引的选择性。
+- 前缀索引如何选择：一般的定义原则是 1.0 * count(distinct columnName)/count(*)
+- 好处和坏处：MySQL 前缀索引能有效减小索引文件的大小，提高索引的速度。但是前缀索引也有它的坏处：MySQL 不能在 ORDER BY 或 GROUP BY 中使用前缀索引，也不能把它们用作覆盖索引(Covering Index)。
 
 ### 覆盖索引？
 
@@ -149,13 +149,13 @@
 > - id相同不相同，同时存在：从大到小，从上到下
 
 - `select_type`: 查询的类型
+
 > - SIMPLE: 简单查询，不包含子查询和union
 > - PRIMRARY: 包含子查询时的最外层查询; 使用union时的第一个查询
-> - UNION: 包含union的查询中非第一个查询
-> - DEPENDENT UNION: 与 UNION 相同，但依赖外层查询的结果
 > - SUBQUERY: 子查询
-> - DEPENDENT SUBQUERY: 依赖外层查询的子查询
 > - DERIVED: 用于 FROM 中的子查询
+> - UNION: 包含union的查询中非第一个查询
+> - UNION RESULT: 从UNION表获取结果的SELECT
 
 - `table`: 对应行正在访问哪一个表，表名或者别名
 - `type`: type显示的是访问类型，是较为重要的一个指标, 一般来说，得保证查询至少达到range级别，最好能达到ref。
