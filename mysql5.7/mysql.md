@@ -165,16 +165,32 @@
 > - ALL： MySQL进行全表扫描。
 > - index：全索引扫描。index与ALL区别为index类型只遍历索引树
 > - range：只检索给定范围的行，使用一个索引来选择行
-> - ref：表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值
-> - eq_ref： 类似ref，区别就在使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配，简单来说，就是多表连接中使用primary key或者 unique key作为关联条件
-> - const、system: 当MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL就能将该查询转换为一个常量,system是const类型的特例，当查询的表只有一行的情况下，使用system
+> - ref：非唯一性索引扫描，返回匹配某个单独值的所有行。
+> - eq_ref：使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配。简单来说，就是多表连接中使用primary key或者 unique key作为关联条件
+> - const: 表示通过索引一次就找到了，const用于比较primary key 或 unique 索引。
+> - system: 表只有一行记录，这是const表的特例
 
-- `possible_keys`: 列指出MySQL能使用哪个索引在该表中找到行。
-- `key`: 列显示MySQL实际决定使用的键（索引）。如果没有选择索引，键是NULL。
-- `key_len`: 列显示MySQL决定使用的键长度。如果键是NULL，则长度为NULL。使用的索引的长度。在不损失精确性的情况下，长度越短越好
-- `ref`: 表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值。
+    eg:
+    # index
+    explain select prod_id from products;
+    # range
+    explain select vend_id from products where vend_id in (1001, 1005);
+    # ref
+    explain select * from vendors, products where vendors.vend_id = products.vend_id;
+    explain select * from products where vend_id = 1001;
+    # eq_ref
+    explain select * from orderitems, products where orderitems.prod_id = products.prod_id; 
+    # const
+    explain select * from products where prod_id = "ANV01";
+
+- `possible_keys`: 列指出MySQL可能使用哪个索引。
+- `key`: 列显示MySQL实际决定使用的键（索引）。如果没有选择索引，键是NULL。`如果查询中使用了覆盖索引，则该索引仅出现在key列表里`。
+- `key_len`: 列显示MySQL决定使用的键长度。如果键是NULL，则长度为NULL。使用的索引的长度。在不损失精确性的情况下，长度越短越好。`并非实际使用长度`
+- `ref`: 哪些列或常量被用于查找索引列上的值。
 - `rows`: rows列显示MySQL认为它执行查询时必须检查的行数。 
 - `Extra`: 该列包含MySQL解决查询的详细信息
+
+> - Using filesort: 说明mysql会对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取
 
 
 ### B+树索引查找
